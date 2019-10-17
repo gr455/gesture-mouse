@@ -3,13 +3,31 @@ import time
 import numpy
 import pynput.mouse
 
+#To display the video
+def showFrame(frame):
+	cv2.imshow("frame",frame)
+	key= cv2.waitKey(10)
+	return key
+
+#Make the rectangle
+def make_rect_contours(finder,frame,b,g,r):
+	for x,y,w,h in finder:
+		cv2.rectangle(frame,(x,y),(x+w,y+h),(b,g,r),3)
+
+def quit(vid):
+	vid.release()
+	cv2.destroyAllWindows()
+
+#controller object
 mouse=pynput.mouse.Controller()
 
+#creates a video capture object. 0 cuz inbuilt camera.
 vid=cv2.VideoCapture(0)
-
 fframeGB=None
 
 check,frame=vid.read()
+
+#Gaussian blur
 frameGB=cv2.GaussianBlur(cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY),(21,21),0)
 fframeGB=frameGB
 find_fist_init=None
@@ -21,8 +39,8 @@ while True:
 	check, frame = vid.read()
 	frame_gray=cv2.GaussianBlur(cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY),(21,21),0)
 
-	cascade_hand=cv2.CascadeClassifier("hand.xml")
-	cascade_fist=cv2.CascadeClassifier("fist.xml")
+	cascade_hand=cv2.CascadeClassifier("cascade_hand.xml")
+	cascade_fist=cv2.CascadeClassifier("cascade_fist.xml")
 
 	find_fist=cascade_fist.detectMultiScale(frame_gray,scaleFactor=1.05,minNeighbors=75)
 
@@ -48,17 +66,13 @@ while True:
 		# print (find_hand[0][0])
 
 	find_fist_init=find_fist
-	for x,y,w,h in find_hand:
-		cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),3)  #frame= because it's needed that all faces are highlighted, else only the ones at the end will be
-	for x,y,w,h in find_fist:
-		cv2.rectangle(frame,(x,y),(x+w,y+h),(0,0,255),3)
-
-	cv2.imshow("frame",frame)
-	key= cv2.waitKey(10)
+	#To show the rectangle on the frame
+	make_rect_contours(find_fist,frame,255,0,0)
+	make_rect_contours(find_hand,frame,0,0,255)
+	key=showFrame(frame)
 
 	if(key==ord('x')):
 		break
 
 
-vid.release()
-cv2.destroyAllWindows()
+quit(vid)
