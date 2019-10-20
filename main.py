@@ -6,7 +6,7 @@ import pynput.mouse
 #To display the video
 def showFrame(frame):
 	cv2.imshow("frame",frame)
-	key= cv2.waitKey(10)
+	key= cv2.waitKey(1)
 	return key
 
 #Make the rectangle
@@ -23,21 +23,19 @@ mouse=pynput.mouse.Controller()
 
 #creates a video capture object. 0 cuz inbuilt camera.
 vid=cv2.VideoCapture(0)
-fframeGB=None
 
 check,frame=vid.read()
+# frame=cv2.flip(frame,1)
 
-#Gaussian blur
-frameGB=cv2.GaussianBlur(cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY),(21,21),0)
-fframeGB=frameGB
 find_fist_init=None
 
 mid_x=0
 mid_y=0
 while True:
 	#Caputures the frame
-	check, frame = vid.read()
+	frame = vid.read()[1]
 	frame_gray=cv2.GaussianBlur(cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY),(21,21),0)
+
 
 	cascade_hand=cv2.CascadeClassifier("cascade_hand.xml")
 	cascade_fist=cv2.CascadeClassifier("cascade_fist.xml")
@@ -62,13 +60,14 @@ while True:
 
 		mid_x=(delx+delx+delw)/2
 		mid_y=(dely+dely+delh)/2
-		mouse.move(-1*5*delx,5*dely)
+		mouse.move(-1*7*delx,7*dely)
 		# print (find_hand[0][0])
 
 	find_fist_init=find_fist
 	#To show the rectangle on the frame
 	make_rect_contours(find_fist,frame,255,0,0)
 	make_rect_contours(find_hand,frame,0,0,255)
+	frame=cv2.flip(frame,1)
 	key=showFrame(frame)
 
 	if(key==ord('x')):
