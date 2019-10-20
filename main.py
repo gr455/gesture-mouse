@@ -1,3 +1,4 @@
+#VERY COOL PROJECT BRO :) 
 import cv2
 import time
 import numpy
