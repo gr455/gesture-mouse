@@ -1,0 +1,9 @@
+SAMPLES:
+opencv_createsamples -img ../pos_fist/fist_test75.jpg -bg neg_list.txt -info info/info5.lst -pngoutput info/ -maxxangle 0.5 maxyangle 0.5 maxzangle 0.5 -num 7000
+
+VECTOR:
+opencv_createsamples -info info/info.lst -num 7000 -w 40 -h 40 -vec ../positives.vec
+
+TRAIN:
+opencv_traincascade -data data -vec ../positives.vec -bg neg_list.txt -numPos 6500 -numNeg 900 -numStages 10 -w 40 -h 40
+
