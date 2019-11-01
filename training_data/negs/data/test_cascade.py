@@ -40,7 +40,7 @@ while True:
 	# cascade_hand=cv2.CascadeClassifier("cascade_hand.xml")
 	cascade_fist=cv2.CascadeClassifier("cascade.xml")
 
-	find_fist=cascade_fist.detectMultiScale(frame_gray,scaleFactor=1.05,minNeighbors=75)
+	find_fist=cascade_fist.detectMultiScale(frame_gray,scaleFactor=1.10,minNeighbors=300)
 
 	# if find_fist is not None:
 	# 	mouse.click(pynput.mouse.Button.left,1)
