@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Gesture Mouse}
+\author{Ruturaj Mohite}
+\date{}
+
+\usepackage{hyperref}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+The Python project is based on computer vision to detect
+hand and it’s gestures to control mouse input.
+The project uses OpenCV and Pynput as primary python
+libraries to work.
+
+\section{Problem Description}
+The idea was just out of pure laziness. It is sometimes a
+pain to get up from a comfy position in the bed just to skip
+a YouTube ad. There should be an easy way to skip the ad,
+or even click on a different video from the comfort of the
+bed without having to get up.
+
+\section{Solution}
+This script provides a simple solution to the problem by
+using hand gestures to control the mouse. It uses a HAAR
+Cascade Classifier created by training the program against
+thousands of images to detect the required gestures. Further,
+the change in the detected coordinates between two
+consecutive frames is used to move the mouse on the screen
+using Pynput library. All the user has to do is move their
+hand with their fist clenched to move the mouse and
+opening the fist will result in a left mouse click.
+
+\section{Installation}
+Install all the dependencies from requirements.txt.
+The requirements.txt is a vague file as of now and ‘pip
+install -r requirements.txt’ won’t work. Make sure to
+manually install all dependencies.
+‘python3 main.py’ to run.
+
+\section{Progress}
+The project is in full working condition. However, the
+ HAAR Cascade Classifier made(located as./training\_data/negs/data/cascade.xml)
+needs more training.
+Initially I had used about 500 images for the training which
+did not work out at all. Increasing it gradually, the current
+training stands at about 7000 generated(using OpenCV dev-
+tools) positive images at 10 stages. The current dataset
+detects consistently but with some error. For the time being,
+to present the working of the project, a pre-trained HAAR
+Classifier has been included in the project. I plan to use
+more images and a refined dataset for the same in the near
+future.
+The stability of the mouse, although not terrible, is
+something I would be working on to improve too.
+\section{Conclusions}
+\begin{description}
+\item[$\bullet$]This project helped me learn Python and the OpenCV
+framework a lot(even though there’s still a lot more to
+learn)
+
+\item[$\bullet$] Definitely taught me to be patient as the training takes
+several hours and there were many failed attempts.
+
+\item[$\bullet$]Made me lazier ;)
+\end{description}
+
+\section{References}
+\begin{description}
+\item[$\bullet$] OpenCV Docs
+
+\url{https://docs.opencv.org/3.4/db/d28/tutorial\_cascade\_classifier.html}
+
+\item[$\bullet$] Basic OpenCV
+
+\url{https://www.youtube.com/watch?v=-ZrDjwXZGxI}
+
+\item[$\bullet$]Advanced OpenCV
+
+\url{https://www.youtube.com/watch?v=-Mhy-5YNcG4&list=PLvVx8lH-gGeC8XmmrsG855usswhwt5Tr1}
+
+\item[$\bullet$]HAAR Cascade
+
+\url{https://www.youtube.com/watch?v=88HdqNDQsEk}
+
+
+\end{description}
+
+\end{document}
