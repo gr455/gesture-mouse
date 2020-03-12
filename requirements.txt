@@ -3,6 +3,6 @@
 opencv-python==4.1.1.26
 pynput==1.4.4
 numpy==1.17.2
-PyYAML==3.12
+PyYAML==5.1
 virtualenv==16.7.7
 pipenv==2018.11.26
